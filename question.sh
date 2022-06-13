@@ -40,4 +40,18 @@
 #  2014-09-01,A,3,100.4
 #
 #  >>> Escriba su codigo a partir de este punto <<<
-#
+# Agregar 0 inicial al día
+
+sed 's/\,/\./g' data.csv > data-1.csv
+sed 's/\;/\,/g' data-1.csv > data-2.csv
+sed 's/acn/ACN/' data-2.csv > data-3.csv
+sed -r -e 'sx([^0-9]|^)([0-9]/)x\10\2xg' -e 'sx/([0-9]/)x/0\1xg' data-3.csv > data-4.csv
+sed '1, 11 s/\//\/20/2' data-4.csv > data-5.csv
+sed 's|\([0-2][0-9]\)/\([0-9][0-9]\)/\([0-9][0-9][0-9][0-9]\)|\3-\2-\1|g' data-5.csv > data-6.csv
+sed 's/\,\N/\,\\N/g' data-6.csv > data-7.csv
+sed '5,6 s/\,/\,\\N/2' data-7.csv > data-8.csv
+sed '5 s/\,/\,\\N/3' data-8.csv > data-9.csv
+sed '7 s/\,/\,\\N/3' data-9.csv > data-10.csv
+
+
+
